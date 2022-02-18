@@ -25,7 +25,6 @@ const LoginValidate = (req,res,next)=>{
 const RegisterValidate = (req,res,next)=>{
     let tendangnhap = req.body.txtTaiKhoan;
     let matkhau1 = req.body.txtMatKhau;
-    let matkhau2 = req.body.txtMatKhau2;
     if(!tendangnhap.match(/[a-zA-Z0-9]{6,20}/)){
         res.status(200).json({register:false,messageCode:-1,message:'Tên đăng nhập chỉ gồm chữ và số (6-20 kí tự)'});
     }else{
@@ -33,9 +32,6 @@ const RegisterValidate = (req,res,next)=>{
             res.status(200).json({register:false,messageCode:-1,message:'Mật khẩu tối thiểu 8 kí tự'});
         else if(matkhau1.includes(' ')){
             res.status(200).json({register:false,messageCode:-1,message:'Mật khẩu không chứa dấu cách'});
-        }
-        else if(matkhau1 !== matkhau2){
-            res.status(200).json({register:false,messageCode:-1,message:'Mật khẩu không khớp'});
         }else next();
     }
 }
