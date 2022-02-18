@@ -11,7 +11,6 @@ const connect = mysql.createConnection({
 
 setInterval(()=>{
     connect.query("SELECT version()",(err,res)=>{
-        console.log({err,res});
     })
 },5000);
 
