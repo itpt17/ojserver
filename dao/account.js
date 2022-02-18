@@ -19,7 +19,33 @@ const CapNhatToken = async (token,tendangnhap,cb)=>{
     }) 
 }
 
+const DangKy = async (thongtin,cb)=>{
+    let tendangnhap = thongtin.tendangnhap;
+    let matkhau =  thongtin.matkhau;
+    let hovaten = thongtin.hovaten ? thongtin.hovaten : '-';
+    let email = thongtin.email ? thongtin.email : '-';
+    let sodienthoai = thongtin.sodienthoai ? thongtin.sodienthoai : '-';
+    let ngaysinh = thongtin.ngaysinh ? thongtin.ngaysinh : '-';
+    matkhau = crypto.createHash("sha256").update(matkhau).digest("hex").toUpperCase();
+    let sql =  `SELECT * FROM TaiKhoan WHERE tendangnhap='${tendangnhap}'`;
+    await connect.query(sql,async (err,res)=>{
+           if(err) cb(err,null);
+           else{
+               if(res.length <= 0){
+                    sql = `INSERT INTO TaiKhoan VALUES('${tendangnhap}','${matkhau}',NULL,'${email}','${sodienthoai}','${hovaten}','${ngaysinh}')`;
+                    await connect.query(sql,(err,res)=>{
+                        if(err) cb(err,null);
+                        else cb(null,true); 
+                    });
+               }else{
+                   cb(null,false);
+               }
+           }
+    })
+}
+
 module.exports = {
     DangNhap,
-    CapNhatToken
+    CapNhatToken,
+    DangKy
 }
