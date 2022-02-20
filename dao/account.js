@@ -19,6 +19,13 @@ const CapNhatToken = async (token,tendangnhap,cb)=>{
     }) 
 }
 
+const TimTaiKhoan = async (token,cb)=>{
+    let sql = `SELECT * FROM TaiKhoan WHERE Token='${token}'`;
+    await connect.query(sql,(err,res)=>{
+        cb(err,res);
+    })
+}
+
 const DangKy = async (thongtin,cb)=>{
     let tendangnhap = thongtin.tendangnhap;
     let matkhau =  thongtin.matkhau;
@@ -47,5 +54,6 @@ const DangKy = async (thongtin,cb)=>{
 module.exports = {
     DangNhap,
     CapNhatToken,
-    DangKy
+    DangKy,
+    TimTaiKhoan
 }

@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 const LoginValidate = (req,res,next)=>{
     let tendangnhap = req.body.txtTaiKhoan;
     let matkhau = req.body.txtMatKhau;
@@ -36,7 +38,24 @@ const RegisterValidate = (req,res,next)=>{
     }
 }
 
+const checkToken = (req,res,next)=>{
+    let token = req.get("Authorization");
+    if(!token){
+        res.sendStatus(401);
+    }else{
+        try{
+            token = token.split(" ")[1];
+            console.log(token);
+            jwt.verify(token,process.env.SECRETSTR);
+            next();
+        }catch{
+            res.sendStatus(401);
+        }
+    }
+}
+
 module.exports = {
     LoginValidate,
-    RegisterValidate
+    RegisterValidate,
+    checkToken
 }
