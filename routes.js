@@ -15,4 +15,7 @@ routes.get("/danhmuc",MiddleWare.checkToken,(req,res)=>{
     categoryCtrl.DanhMuc(req,res);
 })
 
+routes.get("/danhmuc/:id",MiddleWare.checkToken,(req,res)=>{
+    categoryCtrl.MotDanhMuc(req,res);
+})
 module.exports = routes;

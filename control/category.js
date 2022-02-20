@@ -9,6 +9,17 @@ const DanhMuc = async (req,res)=>{
     });
 }
 
+const MotDanhMuc = async (req,res)=>{
+    let ID = req.params.id;
+    await categoryDAO.MotDanhMuc(ID,(error,result)=>{
+        if(error) res.status(500).json({error: 'server error'});
+        else{
+            res.status(200).json({category: result});
+        }
+    })
+}
+
 module.exports = {
-    DanhMuc
+    DanhMuc,
+    MotDanhMuc
 }

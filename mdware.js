@@ -45,7 +45,6 @@ const checkToken = (req,res,next)=>{
     }else{
         try{
             token = token.split(" ")[1];
-            console.log(token);
             jwt.verify(token,process.env.SECRETSTR);
             next();
         }catch{

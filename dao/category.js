@@ -7,6 +7,14 @@ const DanhMuc = async (cb)=>{
     })
 }
 
+const MotDanhMuc = async (ID,cb)=>{
+    let sql =  `SELECT * FROM DanhMuc WHERE ID='${ID}'`;
+    await connect.query(sql,(err,res)=>{
+        cb(err,res);
+    })
+}
+
 module.exports = {
-    DanhMuc
+    DanhMuc,
+    MotDanhMuc
 }
