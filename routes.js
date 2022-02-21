@@ -1,6 +1,7 @@
 const routes = require('express').Router();
 const accountCtrl = require('./control/account');
 const categoryCtrl= require('./control/category');
+const problemCtrl = require('./control/problem');
 const MiddleWare = require('./mdware');
 
 routes.post("/dangnhap",MiddleWare.LoginValidate,(req,res)=>{
@@ -17,5 +18,13 @@ routes.get("/danhmuc",MiddleWare.checkToken,(req,res)=>{
 
 routes.get("/danhmuc/:id",MiddleWare.checkToken,(req,res)=>{
     categoryCtrl.MotDanhMuc(req,res);
+})
+
+routes.get("/vande",MiddleWare.checkToken,(req,res)=>{
+    problemCtrl.VanDe(req,res);
+});
+
+routes.get("/vande/:id",MiddleWare.checkToken,(req,res)=>{
+    problemCtrl.VanDeID(req,res);
 })
 module.exports = routes;
