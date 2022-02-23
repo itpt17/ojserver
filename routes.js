@@ -2,6 +2,7 @@ const routes = require('express').Router();
 const accountCtrl = require('./control/account');
 const categoryCtrl= require('./control/category');
 const problemCtrl = require('./control/problem');
+const judgeCtrl = require('./control/oj');
 const MiddleWare = require('./mdware');
 
 routes.post("/dangnhap",MiddleWare.LoginValidate,(req,res)=>{
@@ -27,4 +28,9 @@ routes.get("/vande",MiddleWare.checkToken,(req,res)=>{
 routes.get("/vande/:id",MiddleWare.checkToken,(req,res)=>{
     problemCtrl.VanDeID(req,res);
 })
+
+routes.post("/oj",MiddleWare.checkToken,(req,res)=>{
+    judgeCtrl.ChamDiem(req,res);
+})
+
 module.exports = routes;
