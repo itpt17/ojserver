@@ -13,19 +13,19 @@ routes.post("/dangky",MiddleWare.RegisterValidate,(req,res)=>{
     accountCtrl.DangKy(req,res);
 })
 
-routes.get("/danhmuc",MiddleWare.checkToken,(req,res)=>{
+routes.get("/danhmuc",(req,res)=>{
     categoryCtrl.DanhMuc(req,res);
 })
 
-routes.get("/danhmuc/:id",MiddleWare.checkToken,(req,res)=>{
+routes.get("/danhmuc/:id",(req,res)=>{
     categoryCtrl.MotDanhMuc(req,res);
 })
 
-routes.get("/vande",MiddleWare.checkToken,(req,res)=>{
+routes.get("/vande",(req,res)=>{
     problemCtrl.VanDe(req,res);
 });
 
-routes.get("/vande/:id",MiddleWare.checkToken,(req,res)=>{
+routes.get("/vande/:id",(req,res)=>{
     problemCtrl.VanDeID(req,res);
 })
 
